@@ -1,0 +1,62 @@
+site_name: CUTE SDK Document
+site_description: 面向新人的 CUTE 软件栈、测试与实现文档
+site_author: CUTE Team
+
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.tabs
+    - navigation.indexes
+    - navigation.tracking
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: 切换暗色模式
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: 切换亮色模式
+
+plugins:
+  - search:
+      lang:
+        - zh
+        - en
+      separator: '[\s\-\.]+|(?=[\u4e00-\u9fff\u3400-\u4dbf])|(?<=[\u4e00-\u9fff\u3400-\u4dbf])'
+
+markdown_extensions:
+  - tables
+  - footnotes
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+nav:
+  - 首页: index.md
+  - 从熟悉概念理解 CUTE:
+      - 整体图景: architecture.md
+      - 概念对齐: concepts.md
+  - 第一次上手:
+      - 跑通第一组测试: getting-started.md
+      - 一个 Case 的完整旅程: workflow.md
+  - 测试相关:
+      - 测试组织: testing/index.md
+      - 可运行验证: testing/suites.md
+      - Runner: testing/runner.md
+      - Golden 与 Memverify: testing/golden-and-memverify.md
+  - SDK 实现:
+      - Cutelib 总览: cutelib/primitive-and-fusion.md
+      - Runtime 实现: cutelib/runtime.md
+      - Tensor 实现: cutelib/tensor.md
+      - Primitive 实现: cutelib/primitive.md
+      - Fusion 实现: cutelib/fusion.md
+      - Layer 实现: cutelib/layer.md
+  - 参考:
+      - 当前状态: reference/status.md
