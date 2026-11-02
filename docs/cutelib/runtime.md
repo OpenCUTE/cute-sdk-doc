@@ -126,3 +126,25 @@ static inline void cute_wait_task(uint64_t task_id)
 | `runtime_matmul_i8_tiled_128x128_fifo` | FIFO / tiled issue 基础验证 |
 
 这些 case 主要验证 `instruction.h -> runtime wrapper -> hardware macro inst` 的基本链路。
+
+## System checkpoint
+
+`cutelib/runtime/cute_checkpoint.h` 在 runtime 之上提供：
+
+| API | 调用责任与含义 |
+|---|---|
+| `cute_checkpoint_context` | 每 hart 私有，初始化为零，维护软件完成序号 |
+| `cute_checkpoint(&context, key)` | pre-fence → TRACE_MARK → 消费返回 seq → post-fence；返回标记是否匹配 |
+| `cute_checkpoint_finish()` | 最后标记后等待 512 个 CSR 周期，确保 trace 最终 watermark 有机会输出 |
+
+checkpoint 不替调用者等待 CUTE 宏指令。先按 FIFO 顺序 `cute_wait_task`，再标记
+软件任务完成。当前 profile 的 fence 排空此前 RVV 访存；MARK 时 host 要求该
+hart 无 outstanding。必须检查 checkpoint 的返回值，不能只发一条无返回依赖
+的 RoCC 指令就让 CPU 继续操作消费者 buffer。
+
+`key` 是软件任务标签；TL source 是访存事务标签，二者不等价。一个软件任务
+可以包含多个 CUTE tile 和 RVV 操作，最终一次比较全部声明输出。scale 与中间
+workspace 也应有明确归属。详见 [case 接入](../testing/model-case.md)。
+
+上述等待不通过 CPU 读回模型数据，也不模拟 UART 传输。最后的计时等待用于
+日志完整性水位；它不能替代程序之前应执行的 wait/fence。

@@ -1,5 +1,8 @@
 # 可运行验证
 
+> 本页描述历史 suite / memverify 入口及其记录时的输出示例。当前模型迁移和逐任务验收请参见 [System-level 验证](system-verification.md) 与 [状态](../reference/status.md)；历史通过数量不作为本轮结果。
+
+
 这页回答一个很实际的问题：
 
 ```text
@@ -8,11 +11,7 @@
 正常结果应该长什么样？
 ```
 
-默认工作目录：
-
-```bash
-cd /root/opencute/CUTE
-```
+以下命令均从 OpenCUTE 仓库根目录执行。
 
 ## 推荐顺序
 

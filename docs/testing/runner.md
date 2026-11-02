@@ -1,5 +1,8 @@
 # Runner
 
+> 本页描述历史 suite / memverify 入口及其记录时的输出示例。当前模型迁移和逐任务验收请参见 [System-level 验证](system-verification.md) 与 [状态](../reference/status.md)；历史通过数量不作为本轮结果。
+
+
 `tools/runner/cute-test.py` 是当前 SDK 测试的统一入口。可以先把它理解成：
 
 ```text
@@ -27,9 +30,9 @@ runner 主要做这些事：
 
 ## 最常见的命令
 
-```bash
-cd /root/opencute/CUTE
+从 OpenCUTE 仓库根目录执行：
 
+```bash
 python3 tools/runner/cute-test.py \
   --suite cute-sdk/tests/vecprimitive.yaml
 ```

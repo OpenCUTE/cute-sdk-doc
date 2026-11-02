@@ -51,6 +51,9 @@ nav:
       - 可运行验证: testing/suites.md
       - Runner: testing/runner.md
       - Golden 与 Memverify: testing/golden-and-memverify.md
+      - System-level 验证: testing/system-verification.md
+      - BERT 与 LLaMA 迁移: testing/workload-migration.md
+      - 添加模型阶段: testing/model-case.md
   - SDK 实现:
       - Cutelib 总览: cutelib/primitive-and-fusion.md
       - Runtime 实现: cutelib/runtime.md
@@ -60,3 +63,4 @@ nav:
       - Layer 实现: cutelib/layer.md
   - 参考:
       - 当前状态: reference/status.md
+  - OpenCUTE 主文档: /
